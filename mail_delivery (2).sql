@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 07. Nov 2020 um 16:53
+-- Erstellungszeit: 07. Nov 2020 um 16:58
 -- Server-Version: 10.4.14-MariaDB
 -- PHP-Version: 7.4.11
 
@@ -106,7 +106,8 @@ ALTER TABLE `employees`
 ALTER TABLE `mail_station`
   ADD PRIMARY KEY (`mail_station_id`),
   ADD KEY `fk_address_id` (`fk_address_id`),
-  ADD KEY `fk_customer_id` (`fk_customer_id`);
+  ADD KEY `fk_customer_id` (`fk_customer_id`),
+  ADD KEY `employees` (`fk_employees_id`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -156,6 +157,7 @@ ALTER TABLE `employees`
 -- Constraints der Tabelle `mail_station`
 --
 ALTER TABLE `mail_station`
+  ADD CONSTRAINT `employees` FOREIGN KEY (`fk_employees_id`) REFERENCES `employees` (`employees_id`),
   ADD CONSTRAINT `mail_station_ibfk_1` FOREIGN KEY (`fk_address_id`) REFERENCES `address` (`address_id`),
   ADD CONSTRAINT `mail_station_ibfk_2` FOREIGN KEY (`fk_customer_id`) REFERENCES `customer` (`customer_id`);
 COMMIT;
